@@ -1,14 +1,25 @@
+import TodoAppHeader from "./components/TodoAppHeader";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 
-function App() {
+type TodoType = {
+  text: string;
+  id: string;
+  isCompleted: boolean;
+};
+
+const TodoApp = () => {
+  const [todoArray, setTodoArray] = useState<TodoType[]>([]);
+
+  const handleNewTodo = () => {
+    setTodoArray();
+  };
+
   return (
-    <>
-      <h1>Haha</h1>
-    </>
+    <div>
+      <h1>My TypeScript Todo</h1>
+      <TodoAppHeader />
+    </div>
   );
-}
+};
 
-export default App;
+export default TodoApp;
