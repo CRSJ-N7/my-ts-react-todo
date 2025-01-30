@@ -1,19 +1,24 @@
 import c from "./TodoFooter.module.css";
 import { FC } from "react";
+import type { FilterType } from "../TodoApp";
 
 type Props = {
-  onToggleFilter: (value: "all" | "active" | "completed") => void;
+  onToggleFilter: (value: FilterType) => void;
+  onPageClick: (value: number) => void;
   maxPages: number;
 };
-
-
-
 
 const TodoFooter: FC<Props> = (props) => {
   return (
     <div>
       <div className={c.pagination}>
-        <button>Page 1</button>
+        {Array(props.maxPages)
+          .fill(undefined)
+          .map((e, i) => (
+            <button key={i} onClick={() => props.onPageClick(i)}>
+              {++i}
+            </button>
+          ))}
       </div>
       <div className={c.filter}>
         <button onClick={() => props.onToggleFilter("all")}>All todos</button>

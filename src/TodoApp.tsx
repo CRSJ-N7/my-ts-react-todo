@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import TodoAppHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
@@ -10,13 +10,12 @@ export type TodoType = {
   isCompleted: boolean;
 };
 
-type FilterType = "all" | "active" | "completed";
-type PageType = string;
+export type FilterType = "all" | "active" | "completed";
 
 const TodoApp: FC = () => {
   const [todoArray, setTodoArray] = useState<TodoType[]>([]);
   const [filter, setFilter] = useState<FilterType>("all");
-  const [currentPage, setCurrentPage] = useState<PageType>("1");
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const todoPerPage = 5;
 
   const filteredTodoArrays = useMemo(() => {
@@ -30,12 +29,19 @@ const TodoApp: FC = () => {
     }
   }, [todoArray, filter]);
 
-  // const arrayToRender = () => {
+  const maxPages = Math.ceil(filteredTodoArrays.length / todoPerPage);
 
-  // }
+  const paginatedArray = useMemo(() => {
+    const lastIndex = todoPerPage * currentPage;
+    const firstIndex = lastIndex - todoPerPage;
+    return filteredTodoArrays.slice(firstIndex, lastIndex);
+  }, [filteredTodoArrays, currentPage]);
 
-  const maxPages = Math.ceil(filteredTodoArrays.length / todoPerPage) || 1;
-  console.log(maxPages);
+  useEffect(() => {
+    if (paginatedArray.length === 0 && currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  }, [paginatedArray, currentPage]);
 
   const handleAddTodo = (text: string) => {
     const newTask: TodoType = {
@@ -117,6 +123,10 @@ const TodoApp: FC = () => {
     setFilter(value);
   };
 
+  const changeCurrentPage = (value: number) => {
+    setCurrentPage(value);
+  };
+
   return (
     <div>
       <h1>My TypeScript Todo</h1>
@@ -125,13 +135,22 @@ const TodoApp: FC = () => {
         onRemoveCompleted={removeCompletedTasks}
         onToggleAllTasks={toggleAllTasks}
       />
+
       <TodoList
-        todo={filteredTodoArrays}
+        todo={paginatedArray}
         onToggleTodo={handleToggleTodo}
         onDeleteTask={handleDeleteTask}
         onUpdateTask={updateTask}
       />
-      <TodoFooter onToggleFilter={handleToggleFilter} maxPages={maxPages} />
+      {!todoArray.length ? (
+        <h2>No current tasks</h2>
+      ) : (
+        <TodoFooter
+          onToggleFilter={handleToggleFilter}
+          maxPages={maxPages}
+          onPageClick={changeCurrentPage}
+        />
+      )}
     </div>
   );
 };
