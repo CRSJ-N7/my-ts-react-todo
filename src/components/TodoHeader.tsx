@@ -1,7 +1,9 @@
 import { useState, type ChangeEvent, type FC } from "react";
 
 type Props = {
-  handleAddTodo: (text: string) => void;
+  onAddTodo: (text: string) => void;
+  onRemoveCompleted: () => void;
+  onToggleAllTasks: () => void;
 };
 
 const TodoAppHeader: FC<Props> = (props) => {
@@ -12,7 +14,7 @@ const TodoAppHeader: FC<Props> = (props) => {
       alert(`You can't create an empty task`);
       return;
     }
-    props.handleAddTodo(todoText);
+    props.onAddTodo(todoText);
     setTodoText("");
   };
 
@@ -33,10 +35,8 @@ const TodoAppHeader: FC<Props> = (props) => {
         }}
       />
       <button onClick={onAddTodo}>Add</button>
-      <button onClick={() => console.log("Toggle All")}>Toggle All</button>
-      <button onClick={() => console.log("Delete All")}>
-        Delete All Completed
-      </button>
+      <button onClick={props.onToggleAllTasks}>Toggle All</button>
+      <button onClick={props.onRemoveCompleted}>Delete All Completed</button>
     </div>
   );
 };

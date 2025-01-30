@@ -23,6 +23,8 @@ const TodoApp: FC = () => {
     setTodoArray([...todoArray, newTask]);
   };
 
+  
+
   const handleToggleTodo = (id: string) => {
     setTodoArray((prevTodos) => {
       const index = prevTodos.findIndex((todo) => todo.id === id);
@@ -54,14 +56,54 @@ const TodoApp: FC = () => {
     });
   };
 
+  const removeCompletedTasks = () => {
+    setTodoArray((prevTodos) => {
+      return prevTodos.filter((todo) => !todo.isCompleted);
+    });
+  };
+
+  const toggleAllTasks = () => {
+    const hasCompletedTasks = todoArray.some((todo) => todo.isCompleted);
+
+    setTodoArray((prevTodos) => {
+      return prevTodos.map((todo) => ({
+        ...todo,
+        isCompleted: !hasCompletedTasks,
+      }));
+    });
+  };
+
+  const updateTask = (id: string, text: string) => {
+    setTodoArray((prevTodos) => {
+      const index = prevTodos.findIndex((todo) => todo.id === id);
+      if (index === -1) {
+        return prevTodos;
+      }
+
+      const newTodos = [...prevTodos];
+
+      newTodos[index] = {
+        ...newTodos[index],
+        text: text,
+      };
+
+      return newTodos;
+    });
+  };
+
   return (
     <div>
       <h1>My TypeScript Todo</h1>
-      <TodoAppHeader handleAddTodo={handleAddTodo} />
+      <TodoAppHeader
+        onAddTodo={handleAddTodo}
+        onRemoveCompleted={removeCompletedTasks}
+        onToggleAllTasks={toggleAllTasks}
+      />
       <TodoList
-        todoArray={todoArray}
-        handleToggleTodo={handleToggleTodo}
-        handleDeleteTask={handleDeleteTask}
+        todo={todoArray}
+        onToggleTodo={handleToggleTodo}
+        onDeleteTask={handleDeleteTask}
+        onUpdateTask={updateTask}
       />
       <TodoFooter />
     </div>
