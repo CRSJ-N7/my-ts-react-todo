@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import TodoAppHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
@@ -10,8 +10,32 @@ export type TodoType = {
   isCompleted: boolean;
 };
 
+type FilterType = "all" | "active" | "completed";
+type PageType = string;
+
 const TodoApp: FC = () => {
   const [todoArray, setTodoArray] = useState<TodoType[]>([]);
+  const [filter, setFilter] = useState<FilterType>("all");
+  const [currentPage, setCurrentPage] = useState<PageType>("1");
+  const todoPerPage = 5;
+
+  const filteredTodoArrays = useMemo(() => {
+    switch (filter) {
+      case "active":
+        return todoArray.filter((todo) => !todo.isCompleted);
+      case "completed":
+        return todoArray.filter((todo) => todo.isCompleted);
+      default:
+        return todoArray;
+    }
+  }, [todoArray, filter]);
+
+  // const arrayToRender = () => {
+
+  // }
+
+  const maxPages = Math.ceil(filteredTodoArrays.length / todoPerPage) || 1;
+  console.log(maxPages);
 
   const handleAddTodo = (text: string) => {
     const newTask: TodoType = {
@@ -22,8 +46,6 @@ const TodoApp: FC = () => {
 
     setTodoArray([...todoArray, newTask]);
   };
-
-  
 
   const handleToggleTodo = (id: string) => {
     setTodoArray((prevTodos) => {
@@ -91,6 +113,10 @@ const TodoApp: FC = () => {
     });
   };
 
+  const handleToggleFilter = (value: FilterType) => {
+    setFilter(value);
+  };
+
   return (
     <div>
       <h1>My TypeScript Todo</h1>
@@ -100,12 +126,12 @@ const TodoApp: FC = () => {
         onToggleAllTasks={toggleAllTasks}
       />
       <TodoList
-        todo={todoArray}
+        todo={filteredTodoArrays}
         onToggleTodo={handleToggleTodo}
         onDeleteTask={handleDeleteTask}
         onUpdateTask={updateTask}
       />
-      <TodoFooter />
+      <TodoFooter onToggleFilter={handleToggleFilter} maxPages={maxPages} />
     </div>
   );
 };

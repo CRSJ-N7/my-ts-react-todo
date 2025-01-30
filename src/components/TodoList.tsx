@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 import { FC } from "react";
-import type { TodoType } from "../App";
+import type { TodoType } from "../TodoApp";
 import { default as c } from "./TodoList.module.css";
 
 type Props = {

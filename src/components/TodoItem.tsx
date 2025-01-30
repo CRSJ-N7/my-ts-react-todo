@@ -1,5 +1,5 @@
 import { FC, useState, type ChangeEvent } from "react";
-import type { TodoType } from "../App";
+import type { TodoType } from "../TodoApp";
 import c from "./TodoItem.module.css";
 
 type Props = {
