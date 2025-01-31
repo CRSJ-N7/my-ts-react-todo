@@ -1,0 +1,34 @@
+body {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid teal; */
+}
+
+.todoApp {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid teal; */
+  max-width: 600px;
+}
+.header {
+  color: #ab926b;
+  font-size: 55px;
+  margin-bottom: 55px;
+  cursor: url(./assets/cursor/cursor-pointer.png), pointer;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.logo:hover {
+  background-image: url(./assets/bg3-logo-hover.png);
+}
+
+.logo:hover::after {
+  opacity: 1;
+}

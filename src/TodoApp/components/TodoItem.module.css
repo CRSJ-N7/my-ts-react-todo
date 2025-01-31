@@ -1,0 +1,58 @@
+.todoItem {
+  display: flex;
+  flex-direction: row;
+  word-wrap: break-word;
+  white-space: normal;
+  gap: 3px;
+}
+
+.todoText,
+.todoTextEditing {
+  width: 400px;
+  outline: none;
+  font-family: Merriweather;
+  font-size: 16px;
+  word-break: break-all;
+  background-color: white;
+  margin-left: 23px;
+  transition: transform 0.2s;
+  color: #ffffff;
+  background: rgba(173, 145, 105, 0.3);
+  padding: 5px; /* Добавьте padding для input и div */
+  border: 1px solid transparent; /* Прозрачная граница для input */
+  line-height: 1.5; /* Убедитесь, что line-height одинаковый */
+  box-sizing: border-box; /* Учитываем padding и border в ширине */
+}
+
+.todoText:hover {
+  transform: scale(1.02);
+  background-color: rgba(168, 111, 19, 0.5);
+}
+
+.todoTextEditing {
+  margin-left: 23px;
+  transform: scale(1.02);
+  border: 1px solid rgba(168, 111, 19, 0.5); /* Граница для input */
+}
+
+.todoTextEditing:focus {
+  transform: scale(1.02);
+  background-color: rgba(168, 111, 19, 0.5);
+}
+
+.todoItemButtons {
+  width: 35px;
+  height: 35px;
+  border: none;
+  outline: none;
+  transition: transform 0.2s;
+}
+
+.todoItemButtons img {
+  width: 35px;
+  height: 35px;
+}
+
+.todoItemButtons:hover {
+  transform: scale(1.1);
+}
