@@ -75,6 +75,7 @@
 .todoPerPageOptions option {
   border: none;
   cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
+  background-color: rgb(39, 43, 50, 0.5);
 }
 
 .todoPerPageOptions:hover {

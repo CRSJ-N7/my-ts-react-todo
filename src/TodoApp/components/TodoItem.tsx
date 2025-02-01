@@ -28,66 +28,64 @@ const TodoItem: FC<Props> = (props) => {
   };
 
   return (
-    <>
-      <div
-        id={props.todo.id}
-        className={`${c.todoItem} ${
-          props.todo.isCompleted ? c.completedTask : ""
-        }`}
-      >
-        {editing ? (
-          <input
-            className={c.todoTextEditing}
-            autoFocus
-            value={editingText}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setEditingText(e.target.value)
+    <div
+      id={props.todo.id}
+      className={`${c.todoItem} ${
+        props.todo.isCompleted ? c.completedTask : ""
+      }`}
+    >
+      {editing ? (
+        <input
+          className={c.todoTextEditing}
+          autoFocus
+          value={editingText}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setEditingText(e.target.value)
+          }
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+            saveChanges(e.target.value)
+          }
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Escape") {
+              setEditing(false);
+              setEditingText(props.todo.text.trim());
+            } else if (e.key === "Enter") {
+              saveChanges(e.currentTarget.value);
             }
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-              saveChanges(e.target.value)
-            }
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-              if (e.key === "Escape") {
-                setEditing(false);
-                setEditingText(props.todo.text.trim());
-              } else if (e.key === "Enter") {
-                saveChanges(e.currentTarget.value);
-              }
-            }}
-          />
-        ) : (
-          <div className={c.todoText} onDoubleClick={() => setEditing(true)}>
-            {props.todo.text}
-          </div>
-        )}
-        <div className={c.todoItemButtonsWrapper}>
-          {props.todo.isCompleted ? (
-            <button className={c.todoItemButtons}>
-              <img
-                src={checkedCheckbox}
-                alt="Completed"
-                onClick={() => props.onToggleTodo(props.todo.id)}
-              />
-            </button>
-          ) : (
-            <button className={c.todoItemButtons}>
-              <img
-                src={blankCheckbox}
-                alt="Not completed"
-                onClick={() => props.onToggleTodo(props.todo.id)}
-              />
-            </button>
-          )}
-
-          <button
-            className={c.todoItemButtons}
-            onClick={() => props.onDeleteTask(props.todo.id)}
-          >
-            <img src={deleteTask}></img>
-          </button>
+          }}
+        />
+      ) : (
+        <div className={c.todoText} onDoubleClick={() => setEditing(true)}>
+          {props.todo.text}
         </div>
+      )}
+      <div className={c.todoItemButtonsWrapper}>
+        {props.todo.isCompleted ? (
+          <button className={c.todoItemButtons}>
+            <img
+              src={checkedCheckbox}
+              alt="Completed"
+              onClick={() => props.onToggleTodo(props.todo.id)}
+            />
+          </button>
+        ) : (
+          <button className={c.todoItemButtons}>
+            <img
+              src={blankCheckbox}
+              alt="Not completed"
+              onClick={() => props.onToggleTodo(props.todo.id)}
+            />
+          </button>
+        )}
+
+        <button
+          className={c.todoItemButtons}
+          onClick={() => props.onDeleteTask(props.todo.id)}
+        >
+          <img src={deleteTask}></img>
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

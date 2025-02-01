@@ -24,7 +24,7 @@ const TodoFooter: FC<Props> = (props) => {
   };
 
   return (
-    <div>
+    <>
       <div className={c.pagination}>
         {Array(props.maxPages)
           .fill(undefined)
@@ -93,7 +93,7 @@ const TodoFooter: FC<Props> = (props) => {
           </option>
         </select>
       </div>
-    </div>
+    </>
   );
 };
 

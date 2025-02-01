@@ -36,7 +36,7 @@ const TodoAppHeader: FC<Props> = (props) => {
         data-tooltip-content="Click to add task"
         data-tooltip-class="addTaskTooltip"
       >
-        <img src={addTask}></img>
+        <img src={addTask} />
         <ReactTooltip
           id="add-task"
           className="addTaskTooltip"
@@ -45,7 +45,7 @@ const TodoAppHeader: FC<Props> = (props) => {
       </button>
       <input
         className={c.todoInput}
-        placeholder="...what's next ?"
+        placeholder=" ... for the Absolute"
         value={todoText}
         onChange={(e) => onTodoChange(e)}
         onKeyDown={(e) => {
@@ -61,7 +61,7 @@ const TodoAppHeader: FC<Props> = (props) => {
         data-tooltip-content="Click to toggle all task statuses"
         data-tooltip-class="toggleAllTooltip"
       >
-        <img src={toggleAll}></img>
+        <img src={toggleAll} />
         <ReactTooltip
           id="toggle-all"
           className="toggleAllTooltip"

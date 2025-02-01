@@ -20,6 +20,8 @@ body {
 }
 
 .emptyTodoList {
-  color: white;
+  color: rgb(39, 43, 50, 1);
   margin-right: 250px;
+  text-shadow: -1px -1px 0 #ab926b, 1px -1px 0 #ab926b, -1px 1px 0 #ab926b,
+    1px 1px 0 #ab926b;
 }

@@ -9,17 +9,18 @@
   color: #ffffff;
   letter-spacing: 1px;
   border-radius: 5px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: Quintessential;
   background: rgb(39, 43, 50, 0.7);
   border: 2px solid #ab926b;
   transition: 0.5s ease;
+  font-size: 16px;
 }
 
 .todoInput::placeholder {
   color: rgb(250, 250, 250);
   transition: color 0.2s ease;
-  font-style: italic;
+  opacity: 0.5;
+  letter-spacing: 2px;
 }
 .todoInput:focus {
   background-color: rgb(171, 146, 107, 0.5);
@@ -42,7 +43,7 @@
   height: 47px;
   border: none;
   outline: none;
-  transition: transform 0.2s;
+  transition: 0.2s ease;
 }
 
 .headerButtons:hover {
