@@ -6,51 +6,67 @@
   gap: 3px;
 }
 
+.completedTask {
+  text-decoration: line-through;
+  opacity: 0.6;
+  font-style: italic;
+  color: white;
+}
+
 .todoText,
 .todoTextEditing {
-  width: 400px;
+  width: 390px;
   outline: none;
   font-family: Merriweather;
   font-size: 16px;
   word-break: break-all;
   background-color: white;
-  margin-left: 23px;
   transition: transform 0.2s;
   color: #ffffff;
-  background: rgba(173, 145, 105, 0.3);
-  padding: 5px; /* Добавьте padding для input и div */
-  border: 1px solid transparent; /* Прозрачная граница для input */
-  line-height: 1.5; /* Убедитесь, что line-height одинаковый */
-  box-sizing: border-box; /* Учитываем padding и border в ширине */
+  background: rgb(39, 43, 50, 0.7);
+  padding: 5px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
 }
 
 .todoText:hover {
   transform: scale(1.02);
-  background-color: rgba(168, 111, 19, 0.5);
+  background-color: rgb(39, 43, 50, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .todoTextEditing {
-  margin-left: 23px;
   transform: scale(1.02);
-  border: 1px solid rgba(168, 111, 19, 0.5); /* Граница для input */
+  border: 1px solid rgba(168, 111, 19, 0.5);
 }
 
 .todoTextEditing:focus {
   transform: scale(1.02);
-  background-color: rgba(168, 111, 19, 0.5);
+  background-color: rgb(171, 146, 107, 0.5);
+  border: 1px solid rgba(168, 111, 19, 0.5);
+}
+
+.todoItemButtonsWrapper {
+  display: flex;
+  gap: 20px;
+  margin-left: 10px;
+  width: 100px;
 }
 
 .todoItemButtons {
-  width: 35px;
-  height: 35px;
+  align-self: center;
+  width: 30px;
+  height: 30px;
   border: none;
   outline: none;
   transition: transform 0.2s;
 }
 
 .todoItemButtons img {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
 }
 
 .todoItemButtons:hover {

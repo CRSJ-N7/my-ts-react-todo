@@ -1,10 +1,10 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, type FC } from "react";
 import TodoAppHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
-import type { FC } from "react";
+import TodoLogo from "./components/TodoLogo";
 import logo from "./assets/bg3-logo.png";
-import hoveredLogo from "./assets/b3-logo-hover.png"
+import hoveredLogo from "./assets/b3-logo-hover.png";
 import c from "./TodoApp.module.css";
 
 export type TodoType = {
@@ -34,7 +34,6 @@ const TodoApp: FC = () => {
     const savedTodoPerPage = localStorage.getItem("todoPerPage");
     return savedTodoPerPage ? parseInt(savedTodoPerPage, 10) : 5;
   });
-  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoArray));
@@ -187,23 +186,9 @@ const TodoApp: FC = () => {
 
   return (
     <div className={c.todoApp}>
-      <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{ width: "200px", height: "200px" }}
-      >
-        <img
-          src={isHovered ? hoveredLogo : logo}
-          alt="Hoverable"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
+      <TodoLogo logo={logo} hoveredLogo={hoveredLogo} />
 
-      <h1 className={c.header}>My TypeScript Todo</h1>
+      <h1 className={c.header}>todo</h1>
       <TodoAppHeader
         onAddTodo={handleAddTodo}
         onRemoveCompleted={removeCompletedTasks}
@@ -217,7 +202,7 @@ const TodoApp: FC = () => {
         onUpdateTask={updateTask}
       />
       {!todoArray.length ? (
-        <h2>No current tasks</h2>
+        <h2 className={c.emptyTodoList}>No current tasks</h2>
       ) : (
         <TodoFooter
           onToggleFilter={handleToggleFilter}
@@ -228,6 +213,8 @@ const TodoApp: FC = () => {
           allTodosCount={allTodosCount}
           activeTodosCount={activeTodosCount}
           completedTodosCount={completedTodosCount}
+          currentPage={currentPage}
+          filter={filter}
         />
       )}
     </div>

@@ -1,7 +1,82 @@
 .pagination {
+  margin-top: 15px;
   display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
-.filter {
+.paginationButton,
+.paginationActiveButton {
+  color: white;
+  background: rgb(39, 43, 50, 0.7);
+  width: 25px;
+  height: 25px;
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
+  transition: 0.2s ease;
+}
+
+.paginationActiveButton {
+  color: #ab926b;
+  border: 1px solid rgb(171, 146, 107, 0.8);
+}
+
+.paginationButton:hover {
+  transform: scale(1.1);
+  border: 1px solid rgb(171, 146, 107, 0.5);
+}
+
+.filterWrapper {
+  margin-top: 10px;
   display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.filterButton,
+.filterActive {
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
+  background: rgb(39, 43, 50, 0.5);
+  color: white;
+  width: 85px;
+  height: 66px;
+  transition: 0.2s ease;
+  border: 1px solid rgb(171, 146, 107, 0.1);
+}
+
+.filterButton > p {
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
+  background: rgb(39, 43, 50, 0);
+}
+
+.filterButton:hover,
+.filterActive:hover {
+  transform: scale(1.1);
+  border: 1px solid rgb(171, 146, 107, 0.5);
+}
+
+.filterActive {
+  border: 1px solid rgb(171, 146, 107, 0.8);
+  color: #ab926b;
+}
+
+.todoPerPageWrapper {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.todoPerPageOptions {
+  color: white;
+  background-color: rgb(39, 43, 50, 0.5);
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
+}
+
+.todoPerPageOptions option {
+  border: none;
+  cursor: url(../assets/cursor-pointer.png) 10 10, pointer;
+}
+
+.todoPerPageOptions:hover {
+  border-color: #ab926b;
 }

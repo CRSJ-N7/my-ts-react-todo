@@ -1,4 +1,4 @@
-import { FC, useState, type ChangeEvent } from "react";
+import { useState, type FC, type ChangeEvent } from "react";
 import type { TodoType } from "../TodoApp";
 import c from "./TodoItem.module.css";
 import deleteTask from "../assets/delete-task.png";
@@ -29,7 +29,12 @@ const TodoItem: FC<Props> = (props) => {
 
   return (
     <>
-      <div className={c.todoItem} id={props.todo.id}>
+      <div
+        id={props.todo.id}
+        className={`${c.todoItem} ${
+          props.todo.isCompleted ? c.completedTask : ""
+        }`}
+      >
         {editing ? (
           <input
             className={c.todoTextEditing}
@@ -55,31 +60,32 @@ const TodoItem: FC<Props> = (props) => {
             {props.todo.text}
           </div>
         )}
+        <div className={c.todoItemButtonsWrapper}>
+          {props.todo.isCompleted ? (
+            <button className={c.todoItemButtons}>
+              <img
+                src={checkedCheckbox}
+                alt="Completed"
+                onClick={() => props.onToggleTodo(props.todo.id)}
+              />
+            </button>
+          ) : (
+            <button className={c.todoItemButtons}>
+              <img
+                src={blankCheckbox}
+                alt="Not completed"
+                onClick={() => props.onToggleTodo(props.todo.id)}
+              />
+            </button>
+          )}
 
-        {props.todo.isCompleted ? (
-          <button className={c.todoItemButtons}>
-            <img
-              src={checkedCheckbox}
-              alt="Completed"
-              onClick={() => props.onToggleTodo(props.todo.id)}
-            />
+          <button
+            className={c.todoItemButtons}
+            onClick={() => props.onDeleteTask(props.todo.id)}
+          >
+            <img src={deleteTask}></img>
           </button>
-        ) : (
-          <button className={c.todoItemButtons}>
-            <img
-              src={blankCheckbox}
-              alt="Not completed"
-              onClick={() => props.onToggleTodo(props.todo.id)}
-            />
-          </button>
-        )}
-
-        <button
-          className={c.todoItemButtons}
-          onClick={() => props.onDeleteTask(props.todo.id)}
-        >
-          <img src={deleteTask}></img>
-        </button>
+        </div>
       </div>
     </>
   );

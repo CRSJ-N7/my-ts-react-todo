@@ -1,14 +1,18 @@
 * {
   margin: 0;
   padding: 0;
-  cursor: url(./TodoApp/assets/cursor-default.png), auto;
+  cursor: url(./TodoApp/assets/cursor-default.png) 10 10, auto;
   background-image: url(./TodoApp/assets/background.png);
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  color: white;
-  font-family: Merriweather;
+  font-family: Merriweather, sans-serif;
 }
 
-/* Merriweather */
+.addTaskTooltip.addTaskTooltip,
+.toggleAllTooltip.toggleAllTooltip,
+.deleteAllCompletedToolTip.deleteAllCompletedToolTip {
+  color: #ab926b;
+  background-color: rgb(39, 43, 50);
+}
