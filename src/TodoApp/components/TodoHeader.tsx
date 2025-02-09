@@ -45,7 +45,7 @@ const TodoAppHeader: FC<Props> = (props) => {
       </button>
       <input
         className={c.todoInput}
-        placeholder=" ... for the Absolute"
+        placeholder=" ... what's on your mind?"
         value={todoText}
         onChange={(e) => onTodoChange(e)}
         onKeyDown={(e) => {
